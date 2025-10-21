@@ -1,4 +1,3 @@
-﻿
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -26,7 +25,6 @@ body {
     border-bottom: 3px solid #800000;
 }
 
-
 .logo img {
     height: 50px;
     transition: transform 0.3s ease-in-out;
@@ -35,7 +33,6 @@ body {
     .logo img:hover {
         transform: scale(1.1);
     }
-
 
 .nav-links ul {
     display: flex;
@@ -75,7 +72,6 @@ body {
         transition: transform 0.3s ease;
     }
 
-
     .nav-links a:hover::after {
         transform: scaleX(1);
     }
@@ -92,7 +88,6 @@ body {
     width: 100%;
 }
 
-
     .search-bar input[type="text"] {
         border: none;
         outline: none;
@@ -103,7 +98,6 @@ body {
         border-radius: 30px;
         transition: all 0.3s ease;
     }
-
 
         .search-bar input[type="text"]:focus {
             box-shadow: 0 0 8px #f39c12;
@@ -120,7 +114,6 @@ body {
         cursor: pointer;
         transition: background-color 0.3s ease, transform 0.2s ease;
     }
-
 
         .search-bar button:hover {
             background-color: #e67e22;
@@ -168,7 +161,6 @@ body {
     margin-top: 40px;
 }
 
-
     .main-content h1 {
         color: #800000;
         font-size: 32px;
@@ -182,7 +174,6 @@ body {
         font-weight: 600;
         margin-bottom: 15px;
     }
-
 
     .main-content p {
         font-size: 16px;
@@ -208,13 +199,6 @@ footer {
             text-decoration: underline;
         }
 
-.main-content {
-    padding: 40px 80px;
-    background-color: #fff;
-    color: #333;
-}
-
-
 .hero {
     position: relative;
     width: 97%;
@@ -230,7 +214,6 @@ footer {
     overflow: hidden;
 }
 
-
 .hero-image {
     position: absolute;
     top: 0;
@@ -240,7 +223,6 @@ footer {
     object-fit: cover;
     z-index: -1;
 }
-
 
 .hero h1 {
     font-size: 3rem;
@@ -278,14 +260,12 @@ footer {
         margin-bottom: 40px;
     }
 
-
 .celebrites-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     justify-items: center;
 }
-
 
 .celebrite-card {
     background-color: #f9f9f9;
@@ -296,7 +276,6 @@ footer {
     text-align: center;
 }
 
-
     .celebrite-card img {
         width: 100%;
         max-width: 250px;
@@ -306,13 +285,11 @@ footer {
         transition: transform 0.3s ease;
     }
 
-
     .celebrite-card h3 {
         font-size: 20px;
         color: #333;
         margin-top: 15px;
     }
-
 
     .celebrite-card a {
         display: inline-block;
@@ -600,7 +577,7 @@ footer {
     .videos-medias h2 {
         font-size: 2.5em;
         margin-bottom: 30px;
-        color: #ffffff; /* Or pour contraster sur noir */
+        color: #ffffff;
     }
 
 /* Vidéo principale */
@@ -716,7 +693,6 @@ footer {
     color: #888;
 }
 
-
 .footer {
     background-color: #800000;
     color: #f1f1f1;
@@ -801,14 +777,6 @@ footer {
     color: #bbb;
 }
 
-
-
-
-
-
-
-
-
 .celebrity-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -854,11 +822,6 @@ footer {
         font-weight: bold;
     }
 
-
-
-
-
-
 .intro-section {
     display: flex;
     justify-content: space-between;
@@ -885,33 +848,30 @@ footer {
 }
 
 .intro-image img {
-    width: 700px; /* augmente la largeur */
-    height: 350px; /* augmente la hauteur */
-    object-fit: cover; /* ajuste l’image sans déformation */
+    width: 700px;
+    height: 350px;
+    object-fit: cover;
     border-radius: 10px;
-    margin-bottom: 0; /* Assure qu'il n'y a pas d'espace sous l'image */
+    margin-bottom: 0;
 }
 
 .intro-image {
     flex: 1;
     text-align: right;
-    margin-bottom: 0; /* Enlever l'espace en bas du conteneur de l'image */
+    margin-bottom: 0;
 }
-
-
-
 
 /* Enlever les marges de la section intro et de la section service */
 .hero {
-    margin-bottom: 0; /* Enlever la marge en bas de la section intro */
-    padding-bottom: 0; /* Enlever le padding sous la section intro */
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .image-section {
     padding: 10px 30px;
     background-color: #fff;
     text-align: center;
-    margin-top: 0; /* Supprimer l'espace avant la section service */
+    margin-top: 0;
 }
 
 .service-container {
@@ -927,13 +887,12 @@ footer {
 }
 
     .service-item img {
-        width: 100px; /* Réduire la taille des images (cercle) */
-        height: 100px; /* Réduire la taille des images (cercle) */
+        width: 100px;
+        height: 100px;
         border-radius: 50%;
         object-fit: cover;
-        margin-bottom: 8px; /* Réduit l'espace entre l'image et le sous-titre */
+        margin-bottom: 8px;
     }
-
 
     .service-item h3 {
         font-size: 1rem;
@@ -985,7 +944,6 @@ footer {
         border-radius: 5px;
     }
 
-
 .tous-evenements {
     padding: 50px;
     background-color: #ffffff;
@@ -1026,10 +984,9 @@ footer {
         color: #222;
     }
 
-
 /* Bouton orange Réserver */
 .reserve-button {
-    background-color: #f39c12; /* Orange */
+    background-color: #f39c12;
     color: white;
     border: none;
     padding: 12px 24px;
@@ -1053,90 +1010,7 @@ footer {
 
 /* Style du formulaire de réservation centré comme une fiche */
 .reservation-form {
-    margin: 30px auto; /* Centre horizontalement */
-    background-color: #fff;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    padding: 25px;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-    /* Champs du formulaire */
-    .reservation-form input[type="text"],
-    .reservation-form input[type="email"],
-    .reservation-form input[type="number"] {
-        padding: 12px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        box-sizing: border-box;
-        width: 100%;
-    }
-
-    /* Bouton de validation */
-    .reservation-form button[type="submit"] {
-        background-color: #800000;
-        color: white;
-        border: none;
-        padding: 12px;
-        font-size: 16px;
-        font-weight: bold;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-        .reservation-form button[type="submit"]:hover {
-            background-color: #800000;
-        }
-
-/* Animation d'apparition du formulaire */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-
-/* Bouton orange Réserver */
-.reserve-button {
-    background-color: #f39c12; /* Orange */
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    margin-top: 10px;
-}
-
-    .reserve-button:hover {
-        background-color: #e67e22;
-        transform: scale(1.05);
-    }
-
-    .reserve-button:active {
-        transform: scale(0.98);
-    }
-
-/* Style du formulaire de réservation centré comme une fiche */
-.reservation-form {
-    margin: 30px auto; /* Centre horizontalement */
+    margin: 30px auto;
     background-color: #fff;
     border: 2px solid #ddd;
     border-radius: 10px;

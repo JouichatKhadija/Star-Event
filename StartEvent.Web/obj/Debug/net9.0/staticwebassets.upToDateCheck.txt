@@ -1,6 +1,6 @@
 wwwroot\css\css\admin.css
-wwwroot\css\css\styles.css
 wwwroot\css\site.css
+wwwroot\css\styles.css
 wwwroot\favicon.ico
 wwwroot\images\1.jpg
 wwwroot\images\Arts du spectacle et de la scène.png
@@ -133,8 +133,8 @@ wwwroot\lib\jquery\dist\jquery.slim.min.js
 wwwroot\lib\jquery\dist\jquery.slim.min.map
 wwwroot\lib\jquery\LICENSE.txt
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\wwwroot\css\css\admin.css
-C:\Users\HP\Desktop\StartEvent\StartEvent.Web\wwwroot\css\css\styles.css
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\wwwroot\css\site.css
+C:\Users\HP\Desktop\StartEvent\StartEvent.Web\wwwroot\css\styles.css
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\wwwroot\favicon.ico
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\wwwroot\js\site.js
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css

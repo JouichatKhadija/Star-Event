@@ -145,8 +145,6 @@ C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\scopedcss\Views\S
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\scopedcss\bundle\StartEvent.Web.styles.css
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\scopedcss\projectbundle\StartEvent.Web.bundle.scp.css
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\compressed\cgb340we1q-h4wy1at6pn.gz
-C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\compressed\16i2z9x0lv-agbonmkl70.gz
-C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\compressed\utl1kvufdw-b9sayid5wm.gz
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\compressed\co4f13gjsi-61n19gt1b8.gz
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\compressed\x4091e5qpl-xtxxf3hu2r.gz
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\compressed\aqvg5l44qy-bqjiyaj88i.gz
@@ -220,7 +218,6 @@ C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\refint\StartEvent
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\StartEvent.Web.pdb
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\StartEvent.Web.genruntimeconfig.cache
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\ref\StartEvent.Web.dll
-C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\bin\Debug\net9.0\Microsoft.AspNetCore.Razor.Language.dll
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\bin\Debug\net9.0\Microsoft.Build.dll
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\bin\Debug\net9.0\Microsoft.Build.Framework.dll
@@ -340,3 +337,7 @@ C:\Users\HP\Desktop\StartEvent\StartEvent.Web\bin\Debug\net9.0\ru\Microsoft.Code
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\HP\Desktop\StartEvent\StartEvent.Web\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Scripting.resources.dll
+C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\StartEvent.Web.sourcelink.json
+C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\compressed\utl1kvufdw-th6d9e8f10.gz
+C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\compressed\vlfacld89k-o7r4vm0a20.gz
+C:\Users\HP\Desktop\StartEvent\StartEvent.Web\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

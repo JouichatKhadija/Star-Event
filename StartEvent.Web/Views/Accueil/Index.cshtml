@@ -1,0 +1,417 @@
+@model StartEvent.Web.Models.HomeViewModel
+
+@{
+    ViewData["Title"] = "Start&Event - Célébrités & Événements";
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Styles simplifiés pour la vue */
+        .user-buttons a {
+            text-decoration: none;
+        }
+
+        #contact {
+            background-color: #f9f9f9;
+            padding: 60px 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .contact-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+            .contact-container h2, .contact-container h3 {
+                text-align: center;
+                color: #333;
+                margin-bottom: 20px;
+            }
+
+        .contact-info p {
+            margin: 8px 0;
+        }
+
+        .contact-info a {
+            color: #800000;
+            text-decoration: none;
+        }
+
+            .contact-info a:hover {
+                text-decoration: underline;
+            }
+
+        .contact-form input, .contact-form textarea {
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form button {
+            padding: 12px;
+            background-color: #f39c12;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .contact-form button:hover {
+                background-color: #e67e22;
+            }
+
+        .celebrites-gallery, .event-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .celebrite-card, .event-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            width: 220px;
+            text-align: center;
+        }
+
+            .celebrite-card img, .event-card img {
+                width: 100%;
+                height: auto;
+                border-radius: 5px;
+            }
+
+        /* Formulaire de contact */
+        .contact-container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+            .contact-container h2,
+            .contact-container h3 {
+                text-align: center;
+                color: #333;
+                margin-bottom: 25px;
+            }
+
+        .contact-info p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .contact-info a {
+            color: #800000;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+            .contact-info a:hover {
+                color: #b22222;
+                text-decoration: underline;
+            }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+            .contact-form input,
+            .contact-form textarea {
+                padding: 14px 16px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                transition: border-color 0.3s, box-shadow 0.3s;
+                width: 100%;
+            }
+
+                .contact-form input:focus,
+                .contact-form textarea:focus {
+                    border-color: #f39c12;
+                    box-shadow: 0 0 8px rgba(243, 156, 18, 0.4);
+                    outline: none;
+                }
+
+            .contact-form textarea {
+                min-height: 140px;
+                resize: vertical;
+            }
+
+            .contact-form button {
+                padding: 14px;
+                font-size: 16px;
+                color: #fff;
+                background-color: #f39c12;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.3s, transform 0.2s;
+            }
+
+                .contact-form button:hover {
+                    background-color: #e67e22;
+                    transform: translateY(-2px);
+                }
+
+                .contact-form button:active {
+                    transform: translateY(0);
+                }
+    </style>
+</head>
+<body>
+    
+
+    <section class="hero">
+        <img src="~/images/1.jpg" alt="Image de fond" class="hero-image">
+        <div class="hero-content">
+            <h1>Rencontrez vos célébrités préférées et découvrez les événements incontournables</h1>
+            <p>Restez informé sur les derniers événements et vivez l'univers des célébrités.</p>
+            <a asp-controller="Evenements" asp-action="Index" class="cta-button">Explorez les événements</a>
+        </div>
+    </section>
+
+    <section class="celebrites">
+        <h2>Célébrités Populaires</h2>
+        <div class="celebrites-gallery">
+            @foreach (var celebrite in Model.Celebrites)
+            {
+                <div class="celebrite-card">
+                    <img src="@celebrite.PhotoPath ?? " ~ /images/default_user.png"" alt="@celebrite.Nom">
+                    <h3>@celebrite.Nom</h3>
+                    <a asp-controller="Celebrites" asp-action="Profil" asp-route-id="@celebrite.Id" class="cta-profile">Voir le profil</a>
+                </div>
+            }
+        </div>
+    </section>
+
+    <section class="evenements-a-venir">
+        <h2>Événements à venir</h2>
+        <div id="events-list">
+            @foreach (var eventItem in Model.Evenements)
+            {
+                <div class="event-card" id="event-@eventItem.Id">
+                    <img src="@eventItem.ImagePath ?? " ~ /images/default_event.jpg"" alt="@eventItem.Nom">
+                    <h3>@eventItem.Nom</h3>
+                    <p class="description">@eventItem.Description</p>
+                    <p><strong>Date :</strong> @eventItem.DateEvenement.ToString("dd MMMM yyyy")</p>
+                    <p><strong>Lieu :</strong> @eventItem.Lieu</p>
+                    <p><strong>Prix :</strong> @eventItem.Prix?.ToString("F2") €</p>
+                </div>
+            }
+            @if (!Model.Evenements.Any())
+            {
+                <p>Aucun événement disponible pour le moment.</p>
+            }
+        </div>
+    </section>
+    <section class="actualites-recentes" id="actualites">
+        <h2>Actualités récentes</h2>
+        <div class="actus-list">
+            <div class="actus-card">
+                <h3><a href="#article1">Tom Hanks annonce un nouveau projet passionnant</a></h3>
+                <p>Tom Hanks revient au cinéma avec un film inspiré d'une histoire vraie. Découvrez tous les détails sur cette nouvelle production hollywoodienne.</p>
+            </div>
+
+            <div class="actus-card">
+                <h3><a href="#article2">Les Oscars 2025 : Qui sont les grands favoris ?</a></h3>
+                <p>Zendaya, Timothée Chalamet, et d'autres grandes stars sont en lice pour les prestigieux trophées cette année. Découvrez les pronostics et analyses.</p>
+            </div>
+
+            <div class="actus-card">
+                <h3><a href="#article3">Taylor Swift annonce une nouvelle tournée mondiale</a></h3>
+                <p>La superstar de la pop partira en tournée en 2025 avec des dates exclusives en Europe. Préparez-vous à vivre une expérience inoubliable.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="projets-collaborations">
+        <div class="circle circle1"></div>
+        <div class="circle circle2"></div>
+        <div class="circle circle3"></div>
+        <div class="circle circle4"></div>
+        <div class="circle circle5"></div>
+        <div class="circle circle6"></div>
+        <div class="circle circle7"></div>
+
+        <h2>Projets spéciaux & Collaborations</h2>
+        <div class="collaborations-list">
+            <div class="collab-card">
+                <img src="~/images/Zendaya x Louis Vuitton.png" alt="Zendaya x Louis Vuitton">
+                <h3>Zendaya x Louis Vuitton</h3>
+                <p>Zendaya devient ambassadrice de la maison Louis Vuitton et dévoile une nouvelle campagne élégante mêlant modernité.</p>
+            </div>
+            <div class="collab-card">
+                <img src="~/images/michaelb-jordan-coach.png" alt="Michael B. Jordan x Coach">
+                <h3>Michael B. Jordan x Coach</h3>
+                <p>L'acteur collabore avec Coach pour créer une collection masculine mêlant style urbain et influences japonaises.</p>
+            </div>
+            <div class="collab-card">
+                <img src="~/images/rihanna-fenty.png" alt="Rihanna x Fenty">
+                <h3>Rihanna x Fenty</h3>
+                <p>Rihanna révolutionne l'industrie de la beauté avec sa marque Fenty, célébrant la diversité et l'inclusivité.</p>
+            </div>
+            <div class="collab-card">
+                <img src="~/images/beyonce-adidas.png" alt="Beyoncé x Adidas">
+                <h3>Beyoncé x Adidas</h3>
+                <p>La chanteuse lance sa collection IVY PARK en partenariat avec Adidas, mêlant streetwear et haute couture.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="videos-medias">
+        <h2>Vidéos & Moments exclusifs</h2>
+
+        <div class="video-featured">
+            <iframe src="https://www.youtube.com/embed/FZSCdXZSLNM"
+                    title="Interview Zendaya Vogue"
+                    frameborder="0"
+                    allowfullscreen>
+            </iframe>
+            <p class="video-caption">Entretien exclusif avec Zendaya – Behind the Scenes chez Vogue.</p>
+        </div>
+
+        <div id="video-carousel" class="video-carousel">
+            <div class="video-thumb">
+                <iframe width="560"
+                        height="315"
+                        src="https://www.youtube.com/embed/TC1UnBDfrQA"
+                        title="Zendaya Interview"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <div class="other-videos">
+                <div class="video-thumb">
+                    <iframe width="560"
+                            height="315"
+                            src="https://www.youtube.com/embed/0ZJKkjgooys"
+                            title="Zendaya Interview"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            <div class="other-videos">
+                <div class="video-thumb">
+                    <iframe width="560"
+                            height="315"
+                            src="https://www.youtube.com/embed/s9F51v_dbWY"
+                            title="Zendaya Interview"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Exemple fetch YouTube API (si besoin)
+            const API_KEY = 'TA_CLE_API_YOUTUBE';
+            const CHANNEL_ID = 'UC_x5XG1OV2P6uZZ5FSM9Ttw';
+            const maxResults = 5;
+
+            fetch(`https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=${maxResults}`)
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('video-carousel');
+                    data.items.forEach(item => {
+                        if(item.id.kind === 'youtube#video') {
+                            const videoId = item.id.videoId;
+                            const title = item.snippet.title;
+                            const videoDiv = document.createElement('div');
+                            videoDiv.classList.add('video-thumb');
+                            videoDiv.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" title="${title}" frameborder="0" allowfullscreen></iframe>`;
+                            container.appendChild(videoDiv);
+                        }
+                    });
+                })
+                .catch(error => console.error('Erreur API YouTube:', error));
+        </script>
+    </section>
+
+    <section class="temoignages">
+        <h2>Témoignages & Citations Inspirantes</h2>
+        <div class="temoignage-container">
+            <div class="temoignage-card">
+                <p class="citation">"Une plateforme incontournable pour les vrais fans !"</p>
+                <p class="auteur">– Claude Marceau, Critique de cinéma</p>
+            </div>
+            <div class="temoignage-card">
+                <p class="citation">"J'adore suivre les actualités ici. Tout est clair, rapide et bien présenté."</p>
+                <p class="auteur">– Sophie Lemaître, Fan de Zendaya</p>
+            </div>
+            <div class="temoignage-card">
+                <p class="citation">"Un outil précieux pour les professionnels du spectacle."</p>
+                <p class="auteur">– Laura Mendy, Chargée de communication événementielle</p>
+            </div>
+            <div class="temoignage-card">
+                <p class="citation">"Très esthétique, informatif, et toujours à jour. Bravo à l'équipe du site."</p>
+                <p class="auteur">– Djibril Cissé, Influenceur & Entrepreneur</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-container">
+            <h2>Contactez-nous</h2>
+            <p>Nous sommes là pour répondre à vos questions. Voici comment vous pouvez nous contacter :</p>
+
+            <div class="contact-info">
+                <p><strong>Email :</strong> <a href="mailto:contact@startandevent.com">contact@startandevent.com</a></p>
+                <p><strong>Téléphone :</strong> <a href="tel:+212522345534">+212 5 22 34 55 34</a></p>
+                <p><strong>Adresse :</strong> 123 Rue de l'Innovation, Casablanca, Maroc</p>
+            </div>
+
+            <hr>
+
+            <h3>Envoyez-nous un message</h3>
+            <form method="post" asp-controller="Accueil" asp-action="Contact" class="contact-form">
+                @Html.AntiForgeryToken()
+                <input type="text" name="Nom" placeholder="Votre nom" required>
+                <input type="email" name="Email" placeholder="Votre email" required>
+                <textarea name="Message" placeholder="Votre message" required></textarea>
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+    </section>
+
+ 
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.min.js"></script>
+    <script src="~/js/scripts.js"></script>
+</body>
+</html>

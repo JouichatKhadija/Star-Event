@@ -1,50 +1,79 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - StartEvent.Web</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/StartEvent.Web.styles.css" asp-append-version="true" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Star&Event</title>
+
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    @RenderSection("Styles", required: false)
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StartEvent.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <header class="navbar">
+        <div class="logo">
+            <img src="~/images/logo.png" alt="Logo">
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a asp-controller="Accueil" asp-action="Index">Accueil</a></li>
+                <li><a asp-controller="Celebrites" asp-action="Index">Célébrités</a></li>
+                <li><a asp-controller="Evenements" asp-action="Index">Événements</a></li>
+                <li><a href="#actualites">Actualités</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Recherche...">
+            <button><i class="fa fa-search"></i></button>
+        </div>
+
+        <div class="user-buttons">
+            <a asp-controller="Account" asp-action="Login">
+                <button class="login-btn"><i class="fa fa-user"></i> Se connecter</button>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Informations légales</h3>
+                <ul>
+                    <li><a href="#mentions">Mentions légales</a></li>
+                    <li><a href="#confidentialite">Politique de confidentialité</a></li>
+                    <li><a href="#conditions">Conditions d'utilisation</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - StartEvent.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email : contact@startandevent.com</p>
+                <p>Téléphone : +212 5 22 34 55 34</p>
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.min.js"></script>
+    <script src="~/js/scripts.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

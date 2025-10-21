@@ -1,0 +1,164 @@
+﻿@model IEnumerable<StartEvent.Web.Models.Celebrite>
+
+@{
+    ViewData["Title"] = "Start&Event - Célébrités";
+    Layout = "_Layout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .celebrite-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+        .celebrite-card {
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .celebrite-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .celebrite-card h3 {
+            margin-top: 15px;
+            font-size: 1.2em;
+        }
+        .celebrite-card p {
+            font-size: 0.95em;
+            color: #555;
+        }
+        main h1, main h2 {
+            text-align: center;
+            color: #800000;
+            margin-top: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        #contact {
+            background-color: #f4f4f4;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .contact-container h2 {
+            color: #800000;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .contact-container p {
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .contact-info p {
+            font-size: 1.1rem;
+            margin: 10px 0;
+        }
+        .contact-info a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        .user-buttons a {
+            text-decoration: none;
+        }
+    </style>
+}
+
+<header class="navbar">
+    <div class="logo">
+        <img src="~/images/logo.png" alt="Logo" />
+    </div>
+    <nav class="nav-links">
+        <ul>
+            <li><a asp-controller="Accueil" asp-action="Index">Accueil</a></li>
+            <li><a asp-controller="Celebrites" asp-action="Index">Célébrités</a></li>
+            <li><a asp-controller="Evenements" asp-action="Index">Événements</a></li>
+            <li><a asp-controller="Accueil" asp-action="Index" asp-fragment="actualites">Actualités</a></li>
+            <li><a asp-controller="Accueil" asp-action="Index" asp-fragment="contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Recherche..." onkeyup="filterCelebrities()" />
+        <button><i class="fa fa-search"></i></button>
+    </div>
+
+    <div class="user-buttons">
+        <a asp-controller="Compte" asp-action="Login">
+            <button class="login-btn"><i class="fa fa-user"></i> Se connecter</button>
+        </a>
+    </div>
+</header>
+
+<script>
+    function filterCelebrities() {
+        const searchQuery = document.getElementById('search-input').value.toLowerCase();
+        const celebrityCards = document.querySelectorAll('.celebrite-card');
+
+        celebrityCards.forEach(card => {
+            const celebrityName = card.querySelector('h3').textContent.toLowerCase();
+            card.style.display = celebrityName.includes(searchQuery) ? '' : 'none';
+        });
+    }
+</script>
+
+<main>
+    <h2 class="section-title">Nos Célébrités</h2>
+    <div class="celebrite-grid">
+        @foreach (var celebrite in Model)
+        {
+            <div class="celebrite-card">
+                <img src="@(celebrite.PhotoPath ?? "~/images/default_user.png")" alt="@celebrite.Nom" />
+                <h3>@celebrite.Nom</h3>
+                <p>@celebrite.Profession</p>
+                <a asp-controller="Celebrites" asp-action="Profil" asp-route-id="@celebrite.Id">Voir le profil</a>
+            </div>
+        }
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Informations légales</h3>
+            <ul>
+                <li><a href="#mentions">Mentions légales</a></li>
+                <li><a href="#confidentialite">Politique de confidentialité</a></li>
+                <li><a href="#conditions">Conditions d'utilisation</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Suivez-nous</h3>
+            <div class="social-icons">
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h3>Contact</h3>
+            <p>Email : contact@startandevent.com</p>
+            <p>Téléphone : +212 5 22 34 55 34</p>
+        </div>
+    </div>
+</footer>
