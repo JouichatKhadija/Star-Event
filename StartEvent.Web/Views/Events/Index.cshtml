@@ -1,0 +1,23 @@
+@model IEnumerable<StartEvent.Web.Models.Evenement>
+
+<h2>Événements</h2>
+<div class="row">
+	@foreach (var ev in Model)
+	{
+		<div class="col-md-4 mb-3">
+			<div class="card">
+				@if (!string.IsNullOrEmpty(ev.ImagePath))
+				{
+					<img class="card-img-top" src="@Url.Content(ev.ImagePath)" alt="@ev.Nom" />
+				}
+				<div class="card-body">
+					<h5 class="card-title">@ev.Nom</h5>
+					<p class="card-text">@ev.Description</p>
+					<p class="card-text"><small>@ev.Lieu — @ev.DateEvenement.ToString("yyyy-MM-dd")</small></p>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+
+

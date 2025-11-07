@@ -1,0 +1,137 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\HP\\Desktop\\StartEvent\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{069689AA-D082-4F08-8AD0-16218E04BAC7}|StartEvent.Web\\StartEvent.Web.csproj|c:\\users\\hp\\desktop\\startevent\\startevent.web\\models\\celebrite.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{069689AA-D082-4F08-8AD0-16218E04BAC7}|StartEvent.Web\\StartEvent.Web.csproj|solutionrelative:startevent.web\\models\\celebrite.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{069689AA-D082-4F08-8AD0-16218E04BAC7}|StartEvent.Web\\StartEvent.Web.csproj|c:\\users\\hp\\desktop\\startevent\\startevent.web\\controllers\\contactmessagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{069689AA-D082-4F08-8AD0-16218E04BAC7}|StartEvent.Web\\StartEvent.Web.csproj|solutionrelative:startevent.web\\controllers\\contactmessagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{069689AA-D082-4F08-8AD0-16218E04BAC7}|StartEvent.Web\\StartEvent.Web.csproj|c:\\users\\hp\\desktop\\startevent\\startevent.web\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{069689AA-D082-4F08-8AD0-16218E04BAC7}|StartEvent.Web\\StartEvent.Web.csproj|solutionrelative:startevent.web\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{069689AA-D082-4F08-8AD0-16218E04BAC7}|StartEvent.Web\\StartEvent.Web.csproj|c:\\users\\hp\\desktop\\startevent\\startevent.web\\wwwroot\\css\\css\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{069689AA-D082-4F08-8AD0-16218E04BAC7}|StartEvent.Web\\StartEvent.Web.csproj|solutionrelative:startevent.web\\wwwroot\\css\\css\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{069689AA-D082-4F08-8AD0-16218E04BAC7}|StartEvent.Web\\StartEvent.Web.csproj|c:\\users\\hp\\desktop\\startevent\\startevent.web\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{069689AA-D082-4F08-8AD0-16218E04BAC7}|StartEvent.Web\\StartEvent.Web.csproj|solutionrelative:startevent.web\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{069689AA-D082-4F08-8AD0-16218E04BAC7}|StartEvent.Web\\StartEvent.Web.csproj|c:\\users\\hp\\desktop\\startevent\\startevent.web\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{069689AA-D082-4F08-8AD0-16218E04BAC7}|StartEvent.Web\\StartEvent.Web.csproj|solutionrelative:startevent.web\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{069689AA-D082-4F08-8AD0-16218E04BAC7}|StartEvent.Web\\StartEvent.Web.csproj|c:\\users\\hp\\desktop\\startevent\\startevent.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{069689AA-D082-4F08-8AD0-16218E04BAC7}|StartEvent.Web\\StartEvent.Web.csproj|solutionrelative:startevent.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Celebrite.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\Models\\Celebrite.cs",
+              "RelativeDocumentMoniker": "StartEvent.Web\\Models\\Celebrite.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\Models\\Celebrite.cs",
+              "RelativeToolTip": "StartEvent.Web\\Models\\Celebrite.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T08:09:58.494Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ContactMessagesController.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\Controllers\\ContactMessagesController.cs",
+              "RelativeDocumentMoniker": "StartEvent.Web\\Controllers\\ContactMessagesController.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\Controllers\\ContactMessagesController.cs",
+              "RelativeToolTip": "StartEvent.Web\\Controllers\\ContactMessagesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T08:06:29.548Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "styles.css",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\wwwroot\\css\\css\\styles.css",
+              "RelativeDocumentMoniker": "StartEvent.Web\\wwwroot\\css\\css\\styles.css",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\wwwroot\\css\\css\\styles.css",
+              "RelativeToolTip": "StartEvent.Web\\wwwroot\\css\\css\\styles.css",
+              "ViewState": "AgIAAMgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-11-07T08:01:42.812Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "StartEvent.Web\\wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "StartEvent.Web\\wwwroot\\css\\site.css",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-11-07T08:01:35.805Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "StartEvent.Web\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "StartEvent.Web\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-07T08:00:55.877Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "StartEvent.Web\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "StartEvent.Web\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAQwBMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-07T07:46:38.762Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\appsettings.json",
+              "RelativeDocumentMoniker": "StartEvent.Web\\appsettings.json",
+              "ToolTip": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\appsettings.json",
+              "RelativeToolTip": "StartEvent.Web\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-07T07:58:20.413Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
