@@ -58,8 +58,10 @@ namespace StartEvent.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                contactMessage.DateEnvoye = DateTime.UtcNow;
                 _context.Add(contactMessage);
                 await _context.SaveChangesAsync();
+                TempData["ContactSuccess"] = "Votre message a bien été envoyé et stocké dans la boîte de réception.";
                 return RedirectToAction(nameof(Index));
             }
             return View(contactMessage);

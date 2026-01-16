@@ -1,0 +1,67 @@
+@model StartEvent.Web.Models.PaymentViewModel
+@{
+    ViewData["Title"] = "Paiement";
+    Layout = "_Layout";
+}
+
+<section class="container" style="max-width:700px;margin:30px auto;padding:0 20px;">
+    <h1 style="margin-bottom:10px;color:#800000;">Paiement sécurisé</h1>
+    <p style="color:#555;margin-bottom:20px;">Renseignez vos informations pour finaliser votre achat.</p>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div style="background:#fff0f0;color:#a12626;border:1px solid #f3c3c3;padding:10px 12px;border-radius:8px;margin-bottom:14px;font-size:.9em;">
+            Veuillez corriger les erreurs dans le formulaire.
+        </div>
+    }
+
+    <div style="background:#fff;border:1px solid #eee;border-radius:12px;padding:20px;box-shadow:0 8px 18px rgba(0,0,0,0.04);">
+        <form asp-action="ConfirmerPaiement" asp-controller="User" method="post">
+            @Html.AntiForgeryToken()
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+                <div>
+                    <label for="Prenom" style="font-weight:600;">Prénom</label>
+                    <input asp-for="Prenom" id="Prenom" class="form-control" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;" />
+                </div>
+                <div>
+                    <label for="Nom" style="font-weight:600;">Nom</label>
+                    <input asp-for="Nom" id="Nom" class="form-control" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;" />
+                </div>
+            </div>
+
+            <div style="margin-top:16px;">
+                <label for="TypeCarte" style="font-weight:600;">Type de carte</label>
+                <select asp-for="TypeCarte" id="TypeCarte" class="form-control" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;">
+                    <option value="">-- Sélectionner --</option>
+                    <option value="VISA">Visa</option>
+                    <option value="MASTERCARD">MasterCard</option>
+                    <option value="AMEX">American Express</option>
+                    <option value="CB">Carte Bancaire</option>
+                </select>
+            </div>
+
+            <div style="margin-top:16px;">
+                <label for="NumeroCarte" style="font-weight:600;">Numéro de carte</label>
+                <input asp-for="NumeroCarte" id="NumeroCarte" maxlength="19" class="form-control" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;" />
+                <small style="color:#777;">Nous acceptons les cartes internationales (Visa, MasterCard, ...).</small>
+            </div>
+
+            <div style="margin-top:18px;border-top:1px solid #eee;padding-top:14px;display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                    <span style="color:#555;">Total à payer :</span>
+                    <strong style="color:#800000;font-size:1.3em;">@Model.Total.ToString("0.00") €</strong>
+                </div>
+                <button type="submit" style="background:linear-gradient(120deg,#d80f0f,#800000);color:#fff;border:none;padding:12px 22px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 10px 20px rgba(128,0,0,0.25);">
+                    Payer et générer mes tickets
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+
+
+
+

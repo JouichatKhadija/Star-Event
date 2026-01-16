@@ -18,8 +18,14 @@ namespace StartEvent.Web.Controllers
         {
             var model = new HomeViewModel
             {
-                Celebrites = _context.Celebrites.ToList(),
-                Evenements = _context.Evenements.ToList()
+                Celebrites = _context.Celebrites
+                    .OrderBy(c => c.Nom)
+                    .Take(4)
+                    .ToList(),
+                Evenements = _context.Evenements
+                    .OrderBy(e => e.DateEvenement)
+                    .Take(4)
+                    .ToList()
             };
             return View(model);
         }

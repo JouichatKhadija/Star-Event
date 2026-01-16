@@ -1,36 +1,61 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using StartEvent.Web.Data;
 using StartEvent.Web.Models;
-using System.Collections.Generic;
 
 namespace StartEvent.Web.Controllers
 {
     public class CelebritesController : Controller
     {
-        // GET: /Celebrites
-        public IActionResult Index()
-        {
-            // Exemple : liste statique pour tester
-            var celebrites = new List<Celebrite>
-            {
-                new Celebrite { Id = 1, Nom = "Zendaya", Profession = "Actrice", PhotoPath = "~/images/celeb1.jpg" },
-                new Celebrite { Id = 2, Nom = "Tom Hanks", Profession = "Acteur", PhotoPath = "~/images/celeb2.jpg" },
-                new Celebrite { Id = 3, Nom = "Beyoncé", Profession = "Chanteuse", PhotoPath = "~/images/celeb3.jpg" }
-            };
+		private readonly ApplicationDbContext _db;
+        private readonly ILogger<CelebritesController> _logger;
 
-            return View(celebrites); // renvoie la liste au Razor
+		public CelebritesController(ApplicationDbContext db, ILogger<CelebritesController> logger)
+        {
+			_db = db;
+            _logger = logger;
         }
 
-        // GET: /Celebrites/Profil/1
-        public IActionResult Profil(int id)
+        // GET: /Celebrites
+		public async Task<IActionResult> Index(string? q)
         {
-            // Ici tu peux récupérer la célébrité par id depuis ta base
-            var celebrite = new Celebrite
+			var query = _db.Celebrites.AsQueryable();
+
+			if (!string.IsNullOrWhiteSpace(q))
+			{
+				var term = q.Trim();
+				query = query.Where(c =>
+					EF.Functions.Like(c.Nom, $"%{term}%") ||
+					(EF.Functions.Like(c.Profession ?? string.Empty, $"%{term}%")) ||
+					(EF.Functions.Like(c.LieuNaissance ?? string.Empty, $"%{term}%")));
+			}
+
+			var celebrites = await query
+				.OrderBy(c => c.Nom)
+				.ToListAsync();
+
+			return View(celebrites);
+        }
+
+        // GET: /Celebrites/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
             {
-                Id = id,
-                Nom = "Zendaya",
-                Profession = "Actrice",
-                PhotoPath = "~/images/celeb1.jpg"
-            };
+                return NotFound();
+            }
+
+            var celebrite = await _db.Celebrites
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (celebrite == null)
+            {
+                return NotFound();
+            }
+
             return View(celebrite);
         }
     }

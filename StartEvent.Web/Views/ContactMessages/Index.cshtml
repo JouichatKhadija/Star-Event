@@ -5,48 +5,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Boîte de réception</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (TempData["ContactSuccess"] is string ok)
+{
+    <div style="background:#e6ffed;color:#256029;border:1px solid #c0e6c7;padding:10px 12px;border-radius:10px;margin-bottom:14px;font-weight:600;">
+        @ok
+    </div>
+}
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Message)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateEnvoye)
-            </th>
-            <th></th>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Date</th>
+            <th style="text-align:center;">Actions</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Message)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateEnvoye)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            <td>@item.Id</td>
+            <td>@item.Nom</td>
+            <td>@item.Email</td>
+            <td>@item.Message</td>
+            <td>@item.DateEnvoye.ToString("dd/MM/yyyy HH:mm")</td>
+            <td style="text-align:center; white-space:nowrap;">
+                <a href="mailto:@item.Email?subject=Réponse%20à%20votre%20message&body=Bonjour%20@item.Nom," class="btn btn-primary btn-sm">Répondre</a>
+                <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;" onsubmit="return confirm('Supprimer ce message ?');">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                </form>
             </td>
         </tr>
 }

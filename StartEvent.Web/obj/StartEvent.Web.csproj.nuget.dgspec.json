@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\StartEvent.Web.csproj": {}
+    "C:\\Users\\info\\Desktop\\StartEvent\\StartEvent.Web\\StartEvent.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\StartEvent.Web.csproj": {
+    "C:\\Users\\info\\Desktop\\StartEvent\\StartEvent.Web\\StartEvent.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\StartEvent.Web.csproj",
+        "projectUniqueName": "C:\\Users\\info\\Desktop\\StartEvent\\StartEvent.Web\\StartEvent.Web.csproj",
         "projectName": "StartEvent.Web",
-        "projectPath": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\StartEvent.Web.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Desktop\\StartEvent\\StartEvent.Web\\obj\\",
+        "projectPath": "C:\\Users\\info\\Desktop\\StartEvent\\StartEvent.Web\\StartEvent.Web.csproj",
+        "packagesPath": "C:\\Users\\info\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\info\\Desktop\\StartEvent\\StartEvent.Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\info\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
