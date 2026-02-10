@@ -1,0 +1,51 @@
+@model StartEvent.Web.Models.TicketsViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background:#f7f7f7; margin:0; padding:20px; }
+        .ticket-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+        .ticket {
+            background:#fff;
+            border-radius:14px;
+            border:1px solid #eee;
+            overflow:hidden;
+            box-shadow:0 10px 24px rgba(0,0,0,0.06);
+        }
+        .ticket .photo { height:160px; background-size:cover; background-position:center; }
+        .ticket .body { padding:14px 16px; }
+        .ticket h2 { margin:0 0 6px 0; font-size:1.1em; color:#111; }
+        .meta { font-size:.9em; color:#555; margin-bottom:4px; }
+    </style>
+</head>
+<body>
+    <h1 style="color:#800000;">Ticket pour @Model.NomComplet</h1>
+    <div class="ticket-grid">
+        @foreach (var t in Model.Tickets)
+        {
+            var photo = (!string.IsNullOrWhiteSpace(t.ImagePath) && (t.ImagePath.StartsWith("http://") || t.ImagePath.StartsWith("https://")))
+                ? t.ImagePath
+                : Url.Content("~/" + (string.IsNullOrWhiteSpace(t.ImagePath) ? "images/logo.png" : t.ImagePath.TrimStart('/')));
+            <article class="ticket">
+                <div class="photo" style="background-image:url('@photo');"></div>
+                <div class="body">
+                    <div class="meta" style="color:#999;">Ticket électronique</div>
+                    <h2>@t.EvenementNom</h2>
+                    <div class="meta"><i class="fa fa-user"></i> @Model.NomComplet</div>
+                    <div class="meta"><i class="fa fa-calendar"></i> @t.DateEvenement.ToString("dd/MM/yyyy HH:mm")</div>
+                    <div class="meta"><i class="fa fa-map-marker-alt"></i> @t.Lieu</div>
+                    <div class="meta"><strong>Places :</strong> @t.NombrePlaces</div>
+                </div>
+            </article>
+        }
+    </div>
+</body>
+</html>
+
+

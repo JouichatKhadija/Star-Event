@@ -1,0 +1,51 @@
+@model StartEvent.Web.Models.TicketsViewModel
+@{
+    ViewData["Title"] = "Mes tickets";
+    Layout = "_Layout";
+}
+
+<section class="container" style="max-width:1100px;margin:30px auto;padding:0 20px;">
+    <header style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+        <div>
+            <h1 style="margin:0;color:#800000;">Vos tickets</h1>
+            <p style="margin:4px 0;color:#555;">Tickets générés au nom de <strong>@Model.NomComplet</strong>.</p>
+        </div>
+        <a asp-action="Index" asp-controller="User" style="color:#800000;text-decoration:none;">
+            ← Retour à mon panier
+        </a>
+    </header>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+        @foreach (var t in Model.Tickets)
+        {
+            var photo = (!string.IsNullOrWhiteSpace(t.ImagePath) && (t.ImagePath.StartsWith("http://") || t.ImagePath.StartsWith("https://")))
+                ? t.ImagePath
+                : Url.Content("~/" + (string.IsNullOrWhiteSpace(t.ImagePath) ? "images/logo.png" : t.ImagePath.TrimStart('/')));
+            <article style="background:#fff;border-radius:14px;border:1px solid #eee;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,0.06);position:relative;">
+                <div style="height:160px;background-size:cover;background-position:center;background-image:url('@photo');"></div>
+                <div style="padding:14px 16px;">
+                    <div style="font-size:.8em;color:#999;margin-bottom:6px;">Ticket électronique</div>
+                    <h2 style="margin:0 0 6px 0;font-size:1.15em;color:#111;">@t.EvenementNom</h2>
+                    <div style="font-size:.9em;color:#555;margin-bottom:4px;">
+                        <i class="fa fa-user"></i> @Model.NomComplet
+                    </div>
+                    <div style="font-size:.9em;color:#555;margin-bottom:4px;">
+                        <i class="fa fa-calendar"></i> @t.DateEvenement.ToString("dd/MM/yyyy HH:mm")
+                    </div>
+                    <div style="font-size:.9em;color:#555;margin-bottom:4px;">
+                        <i class="fa fa-map-marker-alt"></i> @t.Lieu
+                    </div>
+                    <div style="font-size:.9em;color:#555;margin-top:6px;">
+                        <strong>Places :</strong> @t.NombrePlaces
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+</section>
+
+
+
+
+
+

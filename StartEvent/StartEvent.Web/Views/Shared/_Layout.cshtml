@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Star&Event</title>
+
+    <link rel="stylesheet" href="~/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <img src="~/images/logo.png" alt="Logo">
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li>
+                    <a asp-controller="Accueil" asp-action="Index">Accueil</a>
+                </li>
+
+                <li>
+                    <a asp-controller="Celebrites" asp-action="Index">Célébrités</a>
+                </li>
+
+                <li>
+                    <a asp-controller="Evenements" asp-action="Index">Événements</a>
+                </li>
+
+                <li>
+                    <a asp-controller="Accueil"
+                       asp-action="Index"
+                       asp-fragment="actualites">
+                        Actualités
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Accueil"
+                       asp-action="Index"
+                       asp-fragment="contact">
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+
+        <div class="search-bar">
+            <input type="text" placeholder="Recherche...">
+            <button><i class="fa fa-search"></i></button>
+        </div>
+
+        <div class="user-buttons">
+            @if (User?.Identity?.IsAuthenticated == true)
+            {
+                if (User.IsInRole("admin"))
+                {
+                    <a asp-controller="Admin" asp-action="Index" title="Espace admin">
+                        <button class="login-btn" style="margin-right:10px;">
+                            <i class="fa fa-user-shield"></i>
+                        </button>
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="User" asp-action="Index" title="Mon panier">
+                        <button class="login-btn" style="margin-right:10px;">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>
+                    </a>
+                }
+                <form asp-controller="Account" asp-action="Logout" method="post" style="display:inline;">
+                    <button type="submit" class="login-btn">
+                        <i class="fa fa-sign-out-alt"></i> Se déconnecter
+                    </button>
+                </form>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Login">
+                    <button class="login-btn"><i class="fa fa-user"></i> Se connecter</button>
+                </a>
+            }
+        </div>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Informations légales</h3>
+                <ul>
+                    <li><a href="#mentions">Mentions légales</a></li>
+                    <li><a href="#confidentialite">Politique de confidentialité</a></li>
+                    <li><a href="#conditions">Conditions d'utilisation</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email : contact@startandevent.com</p>
+                <p>Téléphone : +212 5 22 34 55 34</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.min.js"></script>
+    <script src="~/js/scripts.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

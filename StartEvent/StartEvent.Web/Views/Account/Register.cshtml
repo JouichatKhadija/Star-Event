@@ -1,0 +1,185 @@
+@model StartEvent.Web.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Créer un compte";
+    Layout = null; // page indépendante, style aligné sur le login custom
+}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inscription - Start&Event</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --accent: #800000;
+            --bg: #0f0f14;
+            --card: #161621;
+            --muted: #b8b8c7;
+            --border: #222234;
+            --input: #1f1f2c;
+            --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+            background: radial-gradient(circle at 20% 20%, rgba(128,0,0,0.15), transparent 35%),
+                        radial-gradient(circle at 80% 0%, rgba(255,255,255,0.08), transparent 30%),
+                        var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 16px;
+        }
+        .card {
+            width: 100%;
+            max-width: 440px;
+            background: linear-gradient(145deg, #171725, #11111b);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 26px 26px 32px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: -40% 40% auto auto;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, rgba(128,0,0,0.32), transparent 60%);
+            filter: blur(8px);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        .logo img { width: 48px; height: 48px; border-radius: 10px; object-fit: contain; }
+        .logo span { font-weight: 700; letter-spacing: 0.5px; }
+        h1 {
+            margin: 10px 0 6px 0;
+            color: white;
+            font-size: 1.6rem;
+            position: relative;
+            z-index: 1;
+        }
+        p.subtitle {
+            margin: 0 0 18px 0;
+            color: var(--muted);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+        form { position: relative; z-index: 1; }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #eaeaf6;
+        }
+        .field { margin-bottom: 16px; }
+        .input-wrap { position: relative; }
+        .input-wrap i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+        }
+        input {
+            width: 100%;
+            padding: 12px 12px 12px 38px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--input);
+            color: white;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.25);
+        }
+        .actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 4px;
+        }
+        .btn-primary {
+            flex: 1;
+            background: linear-gradient(135deg, #900000, #700000);
+            border: none;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 12px 30px rgba(128,0,0,0.35);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 32px rgba(128,0,0,0.42); }
+        .btn-primary:active { transform: translateY(0); box-shadow: 0 10px 24px rgba(128,0,0,0.3); }
+        .link {
+            color: #b2c7ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .link:hover { text-decoration: underline; }
+        .text-danger {
+            color: #f39c9c;
+            font-size: 0.9rem;
+        }
+        .note {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin: 4px 0 14px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="logo">
+            <img src="~/images/logo.png" alt="Logo">
+            <span>Start&Event</span>
+        </div>
+        <h1>Créer un compte</h1>
+        <p class="subtitle">Rejoignez-nous et réservez vos prochains événements.</p>
+
+        <form asp-action="Register" method="post">
+            <div class="field">
+                <label asp-for="Username"></label>
+                <div class="input-wrap">
+                    <i class="fa fa-user"></i>
+                    <input asp-for="Username" autocomplete="username" />
+                </div>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="field">
+                <label asp-for="Password"></label>
+                <div class="input-wrap">
+                    <i class="fa fa-lock"></i>
+                    <input asp-for="Password" autocomplete="new-password" />
+                </div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <p class="note">Le compte sera créé avec le rôle utilisateur.</p>
+            <div class="actions">
+                <button type="submit" class="btn-primary">Créer le compte</button>
+                <a asp-action="Login" asp-controller="Account" class="link">Déjà inscrit ? Connexion</a>
+            </div>
+        </form>
+    </div>
+    <partial name="_ValidationScriptsPartial" />
+</body>
+</html>
+

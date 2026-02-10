@@ -1,0 +1,321 @@
+@model IEnumerable<StartEvent.Web.Models.Evenement>
+@{
+    ViewData["Title"] = "Événements Musique";
+    Layout = "_Layout";
+    var any = Model?.Any() == true;
+    var isAuthenticated = User?.Identity?.IsAuthenticated == true;
+    var loginUrl = Url.Action("Login", "Account", new { returnUrl = Context.Request.Path + Context.Request.QueryString });
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
+}
+
+@section Styles {
+    <style>
+        .reserve-button {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            margin-top: 10px;
+        }
+        .reserve-button:hover { background-color: #e67e22; transform: scale(1.05); }
+        .reserve-button:active { transform: scale(0.98); }
+
+        .reservation-form {
+            margin: 30px auto;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 25px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .reservation-form input[type="number"],
+        .reservation-form input[type="text"] {
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .reservation-form button[type="submit"] {
+            background: linear-gradient(120deg, #d80f0f, #800000);
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.15s ease, box-shadow 0.2s ease;
+            box-shadow: 0 6px 14px rgba(128, 0, 0, 0.25);
+        }
+        .reservation-form button[type="submit"]:hover {
+            background: linear-gradient(120deg, #ff1f1f, #a00000);
+            transform: translateY(-1px);
+        }
+        .reservation-form button[type="submit"]:active {
+            transform: scale(0.98);
+            box-shadow: 0 3px 8px rgba(128, 0, 0, 0.35);
+        }
+
+        @@keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
+        .messages { margin: 20px auto; width: 80%; text-align: center; }
+        .alert { padding: 15px; border-radius: 5px; font-weight: bold; }
+        .alert-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+
+        .intro-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            align-items: center;
+            gap: 24px;
+            padding: 40px 0;
+        }
+        .intro-image img {
+            width: 100%;
+            max-width: 480px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .evenements-a-venir { padding: 20px 0 40px 0; }
+        .evenements-a-venir h2 { color: #800000; }
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 18px;
+            align-items: stretch;
+        }
+        .event-card {
+            border: 1px solid #e6e6e6;
+            border-radius: 14px;
+            background: #fff;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform .15s ease, box-shadow .2s ease;
+        }
+        .event-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,0.08); }
+        .event-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+        .event-card .body {
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .tous-evenements { padding: 30px 0; }
+        .tous-evenements h2 { color: #800000; }
+        .evenements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 20px;
+        }
+        .evenement-card {
+            background: #fff;
+            border: 1px solid #e6e6e6;
+            border-radius: 14px;
+            padding: 16px;
+            text-align: left;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+            transition: transform .15s ease, box-shadow .2s ease;
+        }
+        .evenement-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+        }
+        .evenement-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+    </style>
+}
+
+<section class="intro-section container" style="max-width:1200px;margin:0 auto;padding:0 20px;">
+    <div class="intro-text">
+        <h2 class="titre-rouge">Événements Musique</h2>
+        <p class="titre-noir">Découvrez les meilleurs événements Musique dans votre région et en ligne</p>
+    </div>
+    <div class="intro-image">
+        <img src="~/images/musique_event.png" alt="Événement Musique">
+    </div>
+</section>
+
+<section class="evenements-a-venir container" style="max-width:1200px;margin:0 auto;padding:0 20px;">
+    <h2>Événements à venir</h2>
+    @if (TempData["ReservationSuccess"] is string okMessage)
+    {
+        <div class="messages">
+            <div class="alert alert-success">@okMessage</div>
+        </div>
+    }
+    @if (any)
+    {
+        <div id="events-list" class="events-grid">
+            @foreach (var ev in Model)
+            {
+                var prix = ev.Prix ?? 0;
+                var photo = (!string.IsNullOrWhiteSpace(ev.ImagePath) && (ev.ImagePath.StartsWith("http://") || ev.ImagePath.StartsWith("https://")))
+                    ? ev.ImagePath
+                    : Url.Content("~/" + (string.IsNullOrWhiteSpace(ev.ImagePath) ? "images/logo.png" : ev.ImagePath.TrimStart('/')));
+                <div class="event-card" id="event-@ev.Id">
+                    <img src="@photo" alt="@ev.Nom">
+                    <div class="body">
+                        <h3>@ev.Nom</h3>
+                        <p class="description">@ev.Description</p>
+                        <p><strong>Date :</strong> @ev.DateEvenement.ToString("dd/MM/yyyy")</p>
+                        <p><strong>Lieu :</strong> @ev.Lieu</p>
+                        <p><strong>Prix :</strong> @prix.ToString("0.00") €</p>
+                        <button class="reserve-button" data-event-id="@ev.Id" data-prix="@prix.ToString("0.00")">Ajouter au panier</button>
+
+                        <form asp-controller="Events"
+                              asp-action="Reserver"
+                              method="post"
+                              class="reservation-form"
+                              id="form-@ev.Id"
+                              style="display: none;"
+                              data-auth="@isAuthenticated.ToString().ToLower()"
+                              data-login-url="@loginUrl">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="eventId" value="@ev.Id" />
+                            <input type="hidden" name="returnUrl" value="@returnUrl" />
+                            <input type="number"
+                                   name="places"
+                                   placeholder="Nombre de places"
+                                   required
+                                   min="1"
+                                   class="place-input"
+                                   data-event-id="@ev.Id"
+                                   value="1">
+                            <input type="text" id="prix-total-@ev.Id" value="Prix : @prix.ToString("0.00") €" readonly>
+                            <button type="submit" class="btn btn-primary">Enregistrer mon choix</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>Aucun événement musical disponible pour le moment.</p>
+    }
+</section>
+
+<section class="tous-evenements container" style="max-width:1200px;margin:0 auto;padding:0 20px;">
+    <h2>Tous les événements</h2>
+    <div class="evenements-grid">
+        <div class="evenement-card">
+            <img src="~/images/Met Gala 2024.png" alt="Met Gala 2024">
+            <h3>Met Gala 2024</h3>
+            <p>Une soirée de mode emblématique avec des célébrités du monde entier, sous le thème "L'Art du Futur".</p>
+        </div>
+        <div class="evenement-card">
+            <img src="~/images/Coachella 2024.png" alt="Coachella 2024">
+            <h3>Coachella 2024</h3>
+            <p>Le festival incontournable de la musique et de la mode en Californie, réunissant des artistes de renommée mondiale.</p>
+        </div>
+        <div class="evenement-card">
+            <img src="~/images/Festival de Cannes 2024.png" alt="Festival de Cannes 2024">
+            <h3>Festival de Cannes 2024</h3>
+            <p>Le rendez-vous international du cinéma, alliant glamour, avant-premières et tapis rouge légendaire.</p>
+        </div>
+        <div class="evenement-card">
+            <img src="~/images/Jeux Olympiques 2024.png" alt="Jeux Olympiques 2024">
+            <h3>Jeux Olympiques 2024</h3>
+            <p>Les plus grands athlètes du monde s'affrontent à Paris lors de ces jeux tant attendus.</p>
+        </div>
+        <div class="evenement-card">
+            <img src="~/images/Rock in Rio 2024.png" alt="Rock in Rio 2024">
+            <h3>Rock in Rio 2024</h3>
+            <p>Le festival de musique le plus populaire du Brésil revient avec une programmation exceptionnelle.</p>
+        </div>
+        <div class="evenement-card">
+            <img src="~/images/Oscars 2024.png" alt="Oscars 2024">
+            <h3>Oscars 2024</h3>
+            <p>La cérémonie des Oscars, où les meilleurs films et artistes de l'année sont récompensés.</p>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const buttons = document.querySelectorAll('.reserve-button');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const form = document.getElementById('form-' + btn.dataset.eventId);
+                    form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'block' : 'none';
+                });
+            });
+
+            document.querySelectorAll('.place-input').forEach(input => {
+                input.addEventListener('input', () => {
+                    const eventId = input.dataset.eventId;
+                    const btn = document.querySelector(`.reserve-button[data-event-id="${eventId}"]`);
+                    const prixUnitaire = parseFloat(btn.dataset.prix);
+                    const quantite = parseInt(input.value) || 0;
+                    const prixTotalField = document.getElementById(`prix-total-${eventId}`);
+                    if (!isNaN(prixUnitaire)) {
+                        const prixTotal = prixUnitaire * quantite;
+                        prixTotalField.value = `Prix : ${prixTotal.toFixed(2)} €`;
+                    } else {
+                        prixTotalField.value = `Prix : - €`;
+                    }
+                });
+            });
+
+            // Bloquer la réservation si l'utilisateur n'est pas connecté
+            document.querySelectorAll('.reservation-form').forEach(form => {
+                form.addEventListener('submit', (e) => {
+                    const isAuth = form.dataset.auth === 'true';
+                    const loginUrl = form.dataset.loginUrl;
+                    if (!isAuth) {
+                        e.preventDefault();
+                        const go = confirm("Connectez-vous pour enregistrer votre choix et l'ajouter à votre panier. Voulez-vous vous connecter maintenant ?");
+                        if (go && loginUrl) {
+                            window.location.href = loginUrl;
+                        }
+                    }
+                });
+            });
+
+        });
+
+        setTimeout(function () {
+            const msgBox = document.querySelector('.messages');
+            if (msgBox) {
+                msgBox.style.animation = "fadeOut 1s forwards";
+                setTimeout(() => msgBox.remove(), 1000);
+            }
+        }, 5000);
+    </script>
+}
+
+
+
+
+

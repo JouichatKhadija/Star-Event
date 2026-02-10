@@ -1,0 +1,325 @@
+@model StartEvent.Web.Models.AdminDashboardViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="~/css/admin.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #f8f8f8; display: flex; }
+        .sidebar { width: 250px; background-color: #000; color: white; height: 100vh; position: fixed; top: 0; left: 0; padding: 20px; }
+        .sidebar .logo img { width: 100%; height: 80px; object-fit: contain; }
+        .sidebar nav ul { list-style: none; padding: 0; margin-top: 30px; }
+        .sidebar nav ul li { margin: 20px 0; }
+        .sidebar nav ul li a { color: white; text-decoration: none; font-size: 18px; display: block; padding: 10px; border-radius: 6px; }
+        .sidebar nav ul li a:hover { background-color: #34495e; }
+        section { margin-left: 270px; width: calc(100% - 270px); padding: 30px 40px; max-width: 1100px; }
+        .table-wrapper { width: 100%; max-width: 1400px; margin: 0 auto; overflow-x: auto; }
+        table { table-layout: fixed; width: 100%; }
+        th, td { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        h1 { color: #800000; font-size: 32px; margin-bottom: 20px; }
+        .btn-add { background-color: #27ae60; color: white; padding: 10px 20px; border: none; border-radius: 6px; text-decoration: none; margin-bottom: 20px; display: inline-block; cursor: pointer; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; }
+        th, td { padding: 12px; text-align: center; border-bottom: 1px solid #ddd; }
+        th { background-color: #800000; color: white; }
+        td img { border-radius: 4px; max-width: 80px; height: auto; }
+        .actions { display: flex; justify-content: center; gap: 10px; }
+        .actions a.btn { background-color: #3498db; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; display: inline-block; }
+        .actions .btn-delete { background-color: #e74c3c; color: white; padding: 6px 12px; border-radius: 6px; border: none; cursor: pointer; }
+        .dashboard-card { flex: 1; min-width: 200px; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.05); text-align: center; }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="~/images/logo.png" alt="Logo" />
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="showSection('dashboard')">Tableau de bord</a></li>
+                <li><a href="#" onclick="showSection('gestion-evenements')">Gestion des événements</a></li>
+                <li><a href="#" onclick="showSection('gestion-celebrites')">Gestion des célébrités</a></li>
+                <li><a href="#" onclick="showSection('gestion-reservations')">Gestion des réservations</a></li>
+                <li><a href="#" onclick="showSection('boite-reception')">Boîte de réception</a></li>
+                <li>
+                    <a asp-controller="Accueil" asp-action="Index" class="btn-add" style="display:block;text-align:center;background:#800000;">Retour au site</a>
+                </li>
+                <li>
+                    <form asp-action="Logout" asp-controller="Account" method="post" style="display:inline;">
+                        <button type="submit" class="btn-add" style="background:#444;">Déconnexion</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <section id="dashboard">
+        <h1>Tableau de Bord</h1>
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            <div class="dashboard-card"><h2 style="color:#800000;">@Model.TotalEvenements</h2><p>Événements</p></div>
+            <div class="dashboard-card"><h2 style="color:#800000;">@Model.TotalCelebrites</h2><p>Célébrités</p></div>
+            <div class="dashboard-card"><h2 style="color:#800000;">@Model.TotalReservations</h2><p>Réservations</p></div>
+            <div class="dashboard-card"><h2 style="color:#800000;">@Model.TotalMessages</h2><p>Messages</p></div>
+        </div>
+    </section>
+
+    <section id="gestion-evenements" style="display:none;">
+        <h1>Gestion des Événements</h1>
+        <button class="btn-add" type="button" onclick="toggleForm('form-evenement')">Ajouter un événement</button>
+        <div id="form-evenement" style="display:none;background:#fff;padding:18px;border-radius:10px;box-shadow:0 6px 16px rgba(0,0,0,0.08);border:1px solid #eee;margin-bottom:16px;">
+            <form asp-action="SaveEvenement" method="post" id="form-event">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="Id" id="EventId" />
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+                    <div><label for="EventNom">Nom</label><input id="EventNom" name="Nom" required style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;" /></div>
+                    <div><label for="EventDate">Date</label><input id="EventDate" name="DateEvenement" type="date" required style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;" /></div>
+                    <div><label for="EventLieu">Lieu</label><input id="EventLieu" name="Lieu" required style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;" /></div>
+                    <div><label for="EventCategory">Catégorie</label><input id="EventCategory" name="Category" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;" /></div>
+                    <div><label for="EventImage">Image (chemin)</label><input id="EventImage" name="ImagePath" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;" /></div>
+                    <div><label for="EventPrix">Prix (€)</label><input id="EventPrix" name="Prix" type="number" step="0.01" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;" /></div>
+                    <div><label for="EventPlaces">Places dispo</label><input id="EventPlaces" name="PlacesDisponibles" type="number" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;" /></div>
+                </div>
+                <div style="margin-top:12px;">
+                    <label for="EventDescription">Description</label>
+                    <textarea id="EventDescription" name="Description" rows="3" required style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;"></textarea>
+                </div>
+                <div style="margin-top:12px;display:flex;gap:10px;">
+                    <button type="submit" class="btn-add" style="background:#27ae60;">Enregistrer</button>
+                    <button type="button" class="btn-add" style="background:#555;" onclick="resetEventForm();toggleForm('form-evenement')">Fermer</button>
+                </div>
+            </form>
+        </div>
+        <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th><th>Nom</th><th>Description</th><th>Date</th><th>Lieu</th><th>Catégorie</th><th>Prix (€)</th><th>Places</th><th>Image</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ev in Model.Evenements)
+                {
+                    <tr>
+                        <td>@ev.Id</td>
+                        <td>@ev.Nom</td>
+                        <td>@ev.Description</td>
+                        <td>@ev.DateEvenement.ToString("dd/MM/yyyy")</td>
+                        <td>@ev.Lieu</td>
+                        <td>@ev.Category</td>
+                        <td>@(ev.Prix.HasValue ? ev.Prix.Value.ToString("0.00") : "—")</td>
+                        <td>@(ev.PlacesDisponibles.HasValue ? ev.PlacesDisponibles.Value.ToString() : "—")</td>
+                        <td>@(string.IsNullOrWhiteSpace(ev.ImagePath) ? "—" : ev.ImagePath)</td>
+                        <td class="actions">
+                            <button type="button" class="btn" style="background:#3498db;" data-edit-event data-id="@ev.Id" data-nom="@ev.Nom" data-date="@ev.DateEvenement.ToString("yyyy-MM-dd")" data-lieu="@ev.Lieu" data-cat="@ev.Category" data-img="@ev.ImagePath" data-prix="@ev.Prix" data-places="@ev.PlacesDisponibles" data-desc="@ev.Description"><i class="fa fa-pen"></i></button>
+                            <form asp-action="DeleteEvenement" method="post" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@ev.Id" />
+                                <button type="submit" class="btn-delete" onclick="return confirm('Supprimer cet événement ?');"><i class="fa fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Evenements.Any())
+                {
+                    <tr><td colspan="10">Aucun événement.</td></tr>
+                }
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <section id="gestion-celebrites" style="display:none;">
+        <h1>Gestion des Célébrités</h1>
+        <button class="btn-add" type="button" onclick="toggleForm('form-celeb')">Ajouter une célébrité</button>
+        <div id="form-celeb" style="display:none;background:#fff;padding:18px;border-radius:10px;box-shadow:0 6px 16px rgba(0,0,0,0.08);border:1px solid #eee;margin-bottom:16px;">
+            <form asp-action="SaveCelebrite" method="post" id="form-celeb-form">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="Id" id="CelebId" />
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+                    <div><label for="CelebNom">Nom</label><input id="CelebNom" name="Nom" required style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;" /></div>
+                    <div><label for="CelebDate">Date de naissance</label><input id="CelebDate" name="DateNaissance" type="date" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;" /></div>
+                    <div><label for="CelebProfession">Profession</label><input id="CelebProfession" name="Profession" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;" /></div>
+                    <div><label for="CelebLieu">Lieu</label><input id="CelebLieu" name="LieuNaissance" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;" /></div>
+                    <div><label for="CelebPhoto">Photo (chemin)</label><input id="CelebPhoto" name="PhotoPath" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;" /></div>
+                </div>
+                <div style="margin-top:12px;">
+                    <label for="CelebParcours">Parcours</label>
+                    <textarea id="CelebParcours" name="Parcours" rows="3" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;"></textarea>
+                </div>
+                <div style="margin-top:12px;">
+                    <label for="CelebLoisirs">Loisirs</label>
+                    <textarea id="CelebLoisirs" name="Loisirs" rows="2" style="width:100%;padding:8px;border-radius:8px;border:1px solid #ddd;"></textarea>
+                </div>
+                <div style="margin-top:12px;display:flex;gap:10px;">
+                    <button type="submit" class="btn-add" style="background:#27ae60;">Enregistrer</button>
+                    <button type="button" class="btn-add" style="background:#555;" onclick="resetCelebForm();toggleForm('form-celeb')">Fermer</button>
+                </div>
+            </form>
+        </div>
+        <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th><th>Nom</th><th>Date de naissance</th><th>Profession</th><th>Lieu</th><th>Photo</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model.Celebrites)
+                {
+                    <tr>
+                        <td>@c.Id</td>
+                        <td>@c.Nom</td>
+                        <td>@(c.DateNaissance.HasValue ? c.DateNaissance.Value.ToString("dd/MM/yyyy") : "—")</td>
+                        <td>@c.Profession</td>
+                        <td>@c.LieuNaissance</td>
+                        <td>@(string.IsNullOrWhiteSpace(c.PhotoPath) ? "—" : c.PhotoPath)</td>
+                        <td class="actions">
+                            <button type="button" class="btn" style="background:#3498db;" data-edit-celeb data-id="@c.Id" data-nom="@c.Nom" data-date="@(c.DateNaissance?.ToString("yyyy-MM-dd"))" data-prof="@c.Profession" data-lieu="@c.LieuNaissance" data-photo="@c.PhotoPath" data-parcours="@c.Parcours" data-loisirs="@c.Loisirs"><i class="fa fa-pen"></i></button>
+                            <form asp-action="DeleteCelebrite" method="post" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@c.Id" />
+                                <button type="submit" class="btn-delete" onclick="return confirm('Supprimer cette célébrité ?');"><i class="fa fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Celebrites.Any())
+                {
+                    <tr><td colspan="7">Aucune célébrité.</td></tr>
+                }
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <section id="gestion-reservations" style="display:none;">
+        <h1>Gestion des Réservations</h1>
+        <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th><th>Utilisateur</th><th>Événement</th><th>Date</th><th>Places</th><th>Payée</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model.Reservations)
+                {
+                    <tr>
+                        <td>@r.Id</td>
+                        <td>@r.Utilisateur?.Username</td>
+                        <td>@r.Evenement?.Nom</td>
+                        <td>@r.DateReservation.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@r.NombrePlaces</td>
+                        <td>@(r.Payee ? "Oui" : "Non")</td>
+                        <td class="actions">
+                            <a class="btn" style="background:#3498db;" asp-action="ReservationTicket" asp-route-id="@r.Id"><i class="fa fa-ticket-alt"></i></a>
+                            <form asp-action="DeleteReservation" method="post" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@r.Id" />
+                                <button type="submit" class="btn-delete" onclick="return confirm('Supprimer cette réservation ?');"><i class="fa fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Reservations.Any())
+                {
+                    <tr><td colspan="7">Aucune réservation.</td></tr>
+                }
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <section id="boite-reception" style="display:none;">
+        <h1>Boîte de Réception</h1>
+        <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th><th>Nom</th><th>Email</th><th>Message</th><th>Date</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model.ContactMessages)
+                {
+                    <tr>
+                        <td>@m.Id</td>
+                        <td>@m.Nom</td>
+                        <td>@m.Email</td>
+                        <td>@m.Message</td>
+                        <td>@m.DateEnvoye.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td class="actions">
+                            <a class="btn" style="background:#3498db;" href="mailto:@m.Email?subject=R%C3%A9ponse%20%C3%A0%20votre%20message&body=Bonjour%20@Uri.EscapeDataString(m.Nom),">Répondre</a>
+                            <form asp-action="Delete" asp-controller="ContactMessages" asp-route-id="@m.Id" method="post" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn-delete" onclick="return confirm('Supprimer ce message ?');"><i class="fa fa-trash"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.ContactMessages.Any())
+                {
+                    <tr><td colspan="6">Aucun message.</td></tr>
+                }
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(s => s.style.display = 'none');
+            const target = document.getElementById(id);
+            if (target) target.style.display = 'block';
+        }
+        function toggleForm(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+        function resetEventForm() {
+            document.getElementById('form-event').reset();
+            document.getElementById('EventId').value = '';
+        }
+        function resetCelebForm() {
+            document.getElementById('form-celeb-form').reset();
+            document.getElementById('CelebId').value = '';
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('dashboard');
+            document.querySelectorAll('[data-edit-event]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.getElementById('EventId').value = btn.dataset.id || '';
+                    document.getElementById('EventNom').value = btn.dataset.nom || '';
+                    document.getElementById('EventDate').value = btn.dataset.date || '';
+                    document.getElementById('EventLieu').value = btn.dataset.lieu || '';
+                    document.getElementById('EventCategory').value = btn.dataset.cat || '';
+                    document.getElementById('EventImage').value = btn.dataset.img || '';
+                    document.getElementById('EventPrix').value = btn.dataset.prix || '';
+                    document.getElementById('EventPlaces').value = btn.dataset.places || '';
+                    document.getElementById('EventDescription').value = btn.dataset.desc || '';
+                    document.getElementById('form-evenement').style.display = 'block';
+                });
+            });
+            document.querySelectorAll('[data-edit-celeb]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.getElementById('CelebId').value = btn.dataset.id || '';
+                    document.getElementById('CelebNom').value = btn.dataset.nom || '';
+                    document.getElementById('CelebDate').value = btn.dataset.date || '';
+                    document.getElementById('CelebProfession').value = btn.dataset.prof || '';
+                    document.getElementById('CelebLieu').value = btn.dataset.lieu || '';
+                    document.getElementById('CelebPhoto').value = btn.dataset.photo || '';
+                    document.getElementById('CelebParcours').value = btn.dataset.parcours || '';
+                    document.getElementById('CelebLoisirs').value = btn.dataset.loisirs || '';
+                    document.getElementById('form-celeb').style.display = 'block';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
